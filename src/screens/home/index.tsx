@@ -1,29 +1,14 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-// import {SafeAreaProvider} from 'react-native-safe-area-context';
-import ProductCard from '../../components/cards/product';
+import {SafeAreaView, StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 const HomeScreen = ({navigation}: any) => {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View>
-          {/* array 10 elements map */}
-          {[...Array(10)].map((_, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => navigation.navigate('ProductDetail')}>
-              <ProductCard />
-            </TouchableOpacity>
-          ))}
-        </View>
-      </ScrollView>
+      <TouchableOpacity onPress={() => navigation.navigate('Products')}>
+        <Text style={styles.item}>Products</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+        <Text style={styles.item}>Profile</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -31,8 +16,16 @@ const HomeScreen = ({navigation}: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: 'red',
+    justifyContent: 'center',
   },
+  item: {
+    padding: 10,
+    fontSize: 32,
+    height: 44,
+    color: 'white',
+  }
 });
 
 export default HomeScreen;

@@ -1,18 +1,35 @@
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import { Product } from '../../../types';
+import { EditText } from '../../../utils/EditText';
 
-const ProductCard = () => {
+interface ProductCardProps {
+  navigation: any;
+  product: Product;
+}
+
+const ProductCard = ({navigation, product}: ProductCardProps) => {
+  const {title, price, description, category, image, id } = product;
   return (
     <>
-      <View style={styles.card}>
-        <Image
-          source={{uri: 'https://via.placeholder.com/150'}}
-          style={{width: 150, height: 150}}
-        />
-        <View style={styles.card__info}>
-          <Text>Product Name</Text>
-          <Text>Price</Text>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('ProductDetail', {
+            id
+          })
+        }>
+        <View style={styles.card}>
+          <Image
+            source={{uri: image}}
+            style={{width: 150, height: 150, objectFit: 'contain'}}
+          />
+          <View style={styles.card__info}>
+            <Text>{title}</Text>
+            <Text>{price} $</Text>
+            <Text>{category}</Text>
+            <Text>{EditText.cropText(description, 200)}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </>
   );
 };
